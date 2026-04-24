@@ -6,7 +6,7 @@
 <title>Carolina · Mis XV Anos · 18 Octubre 2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
@@ -101,11 +101,14 @@ body{
   margin-top:auto;padding:0 28px 64px;text-align:center;
 }
 .hero-name{
-  font-family:'Great Vibes',cursive;font-size:clamp(76px,23vw,106px);line-height:1.05;
-  background:linear-gradient(135deg,#C0C0C0,#F5F5F5 45%,#C0C0C0 100%);
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(22px,7.5vw,38px);
+  font-weight:400;line-height:1.25;letter-spacing:clamp(6px,2vw,14px);
+  text-transform:uppercase;
+  background:linear-gradient(135deg,#9A9A9A 0%,#F5F5F5 35%,#E0E0E0 55%,#C0C0C0 75%,#F5F5F5 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:10px;padding:0 16px;
-  filter:drop-shadow(0 2px 28px rgba(192,192,192,0.22));
+  margin-bottom:10px;padding:0 20px;
+  filter:drop-shadow(0 2px 32px rgba(192,192,192,0.30));
   transform:translateY(30px);opacity:0;
 }
 .hero-sub{display:flex;flex-direction:column;align-items:center;gap:4px;transform:translateY(16px);opacity:0;}
@@ -157,30 +160,33 @@ section{padding:60px 26px;}
   text-align:center;line-height:1.1;margin-bottom:30px;
 }
 
-/* ── COUNTDOWN ── */
-.cd-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
-.cd-box{
-  background:rgba(255,255,255,0.025);
-  border:1px solid rgba(192,192,192,0.16);
-  border-radius:2px;padding:20px 4px 16px;text-align:center;
-  position:relative;overflow:hidden;
-  box-shadow:0 4px 24px rgba(0,0,0,0.40);
+/* ── COUNTDOWN FUGAZ ── */
+.cd-fugaz{
+  display:flex;align-items:flex-start;justify-content:center;gap:0;
 }
-.cd-box::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
-  background:linear-gradient(90deg,transparent,var(--accent) 50%,transparent);
-  opacity:.50;
+.cd-seg{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:64px;}
+.cd-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(44px,13vw,70px);
+  line-height:1;font-weight:300;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(192,192,192,0.65);
+  font-variant-numeric:tabular-nums;
+  display:block;
 }
-.cd-num{
-  font-family:'Cormorant Garamond',serif;font-size:38px;
-  background:linear-gradient(160deg,#C0C0C0,#F5F5F5 50%,#C0C0C0);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  line-height:1;font-weight:500;font-variant-numeric:tabular-nums;
-}
-.cd-lbl{
+.cd-l{
   font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
-  color:rgba(192,192,192,0.45);margin-top:6px;
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(192,192,192,0.32);
+}
+.cd-colon{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,10vw,54px);
+  line-height:1;font-weight:300;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(192,192,192,0.20);
+  margin-top:4px;padding:0 2px;
+  align-self:flex-start;
 }
 
 /* ── UBICACION ── */
@@ -223,41 +229,58 @@ section{padding:60px 26px;}
 .cal-c{text-align:center;}
 .cal-c p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(192,192,192,0.55);margin-bottom:18px;}
 
-/* ── ITINERARIO ZIGZAG ── */
+/* ── ITINERARIO ZIGZAG + DESTELLOS ── */
 .tl-zz{position:relative;padding:8px 0;}
 .tl-zz::before{
   content:'';position:absolute;left:50%;transform:translateX(-0.5px);
   top:0;bottom:0;width:1px;
   background:linear-gradient(to bottom,transparent,rgba(192,192,192,0.18) 8%,rgba(192,192,192,0.18) 92%,transparent);
 }
-.tz-item{
-  position:relative;margin-bottom:20px;
-  width:calc(50% - 24px);
+.tz-row{
+  display:grid;grid-template-columns:1fr 40px 1fr;
+  margin-bottom:28px;align-items:start;
 }
-.tz-item:nth-child(odd){margin-right:auto;text-align:right;}
-.tz-item:nth-child(even){margin-left:auto;text-align:left;}
+.tz-card-w{padding:0 10px;}
+.tz-card-w.l{text-align:right;}
+.tz-card-w.r{text-align:left;}
+.tz-mid{
+  display:flex;justify-content:center;padding-top:14px;
+}
+.tz-void{}
 .tz-dot{
-  position:absolute;top:15px;
-  width:9px;height:9px;border-radius:50%;
+  width:10px;height:10px;border-radius:50%;
   background:var(--accent);
-  border:2.5px solid var(--bg);
-  box-shadow:0 0 0 1.5px rgba(192,192,192,0.30);
-  z-index:2;
+  box-shadow:0 0 0 3px var(--bg),0 0 0 4.5px rgba(192,192,192,0.28);
+  position:relative;z-index:2;flex-shrink:0;
 }
-.tz-item:nth-child(odd) .tz-dot{right:-29px;}
-.tz-item:nth-child(even) .tz-dot{left:-29px;}
+.tz-dot::before,.tz-dot::after{
+  content:'';position:absolute;border-radius:50%;
+  border:1px solid rgba(192,192,192,0.45);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:destello 2.6s ease-out infinite;
+}
+.tz-dot::after{animation-delay:1.3s;}
+@keyframes destello{
+  0%{width:10px;height:10px;opacity:.7;}
+  100%{width:38px;height:38px;opacity:0;}
+}
 .tz-card{
   background:rgba(255,255,255,0.022);
   border:1px solid var(--border);
-  border-radius:6px;padding:14px 16px;
+  border-radius:4px;padding:14px 14px;
   box-shadow:0 4px 22px rgba(0,0,0,0.32);
+  position:relative;overflow:hidden;display:inline-block;width:100%;
+}
+.tz-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(192,192,192,0.35) 50%,transparent);
 }
 .tz-time{
-  font-family:'Cormorant Garamond',serif;font-size:26px;
-  color:var(--accent);letter-spacing:3px;line-height:1;font-weight:300;
+  font-family:'Cormorant Garamond',serif;font-size:28px;
+  color:var(--accent);letter-spacing:2px;line-height:1;font-weight:300;
 }
 .tz-ev{
-  font-family:'Lato',sans-serif;font-size:9.5px;letter-spacing:2px;
+  font-family:'Lato',sans-serif;font-size:9px;letter-spacing:2px;
   text-transform:uppercase;color:rgba(192,192,192,0.50);margin-top:5px;line-height:1.4;
 }
 
@@ -331,40 +354,42 @@ section{padding:60px 26px;}
 }
 .gal-dot.on{background:var(--accent);transform:scale(1.55);}
 
-/* ── MESA DE REGALOS ── */
-.gift-grid{display:flex;flex-direction:column;gap:14px;}
-.gift-card{
-  background:rgba(255,255,255,0.022);
-  border:1px solid var(--border);border-radius:4px;padding:20px;
-  box-shadow:0 4px 22px rgba(0,0,0,0.30);display:flex;align-items:center;gap:16px;
+/* ── MESA DE REGALOS MINIMAL ── */
+.gift-min{text-align:center;}
+.gift-min-item{padding:26px 0;}
+.gm-name{
+  font-family:'Cormorant Garamond',serif;font-size:26px;
+  color:var(--bright);font-weight:300;margin-bottom:6px;
 }
-.gift-logo-wrap{
-  width:58px;height:58px;border-radius:4px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
+.gm-desc{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(192,192,192,0.40);margin-bottom:16px;
 }
-.gift-logo-wrap.amazon{background:#FF9900;}
-.gift-logo-wrap.liverpool{background:#CC0033;}
-.gift-logo-wrap.bank{background:linear-gradient(135deg,#3A3A3A,#222);}
-.gift-body{flex:1;min-width:0;}
-.gift-body .gb-name{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--bright);font-weight:500;margin-bottom:2px;}
-.gift-body .gb-desc{font-family:'Lato',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(192,192,192,0.45);text-transform:uppercase;}
-.gift-body .gb-account{font-family:'Lato',sans-serif;font-size:13px;color:var(--accent);margin-top:6px;letter-spacing:1px;}
-.btn-copy{
-  display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;
-  background:rgba(192,192,192,0.05);color:var(--bright);border-radius:2px;
-  font-family:'Cormorant Garamond',serif;font-size:10px;text-transform:uppercase;letter-spacing:2px;
-  border:1px solid rgba(192,192,192,0.20);cursor:pointer;transition:background .25s;
+.gm-link{
+  font-family:'Cormorant Garamond',serif;font-size:11px;
+  letter-spacing:5px;text-transform:uppercase;
+  color:var(--accent);text-decoration:none;
+  border-bottom:1px solid rgba(192,192,192,0.28);padding-bottom:3px;
+  transition:opacity .25s;
 }
-.btn-copy:hover{background:rgba(192,192,192,0.10);}
-.btn-gift-link{
-  display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:9px 18px;
-  background:transparent;color:var(--accent);border-radius:2px;
-  font-family:'Cormorant Garamond',serif;font-size:10px;font-weight:700;
-  text-transform:uppercase;letter-spacing:2px;text-decoration:none;
-  border:1px solid rgba(192,192,192,0.28);cursor:pointer;
-  transition:background .3s,transform .3s;
+.gm-link:hover{opacity:.65;}
+.gm-account{
+  font-family:'Lato',sans-serif;font-size:14px;
+  color:var(--accent);letter-spacing:3px;margin-bottom:14px;
 }
-.btn-gift-link:hover{background:rgba(192,192,192,0.07);transform:translateY(-2px);}
+.gm-copy{
+  font-family:'Cormorant Garamond',serif;font-size:10px;
+  letter-spacing:4px;text-transform:uppercase;
+  color:rgba(192,192,192,0.45);background:transparent;border:none;cursor:pointer;
+  border-bottom:1px solid rgba(192,192,192,0.18);padding-bottom:2px;
+  transition:color .25s;
+}
+.gm-copy:hover{color:var(--accent);}
+.gm-rule{
+  height:1px;
+  background:linear-gradient(to right,transparent,rgba(192,192,192,0.16) 30%,rgba(192,192,192,0.16) 70%,transparent);
+}
 
 /* ── RSVP ── */
 .rsvp-card{
@@ -389,12 +414,28 @@ section{padding:60px 26px;}
 .rsvp-card select option{background:#1A1A1A;color:#E8E8E8;}
 .btn-wa{
   display:flex;align-items:center;justify-content:center;gap:10px;
-  width:100%;margin-top:20px;padding:15px;min-height:48px;
-  background:#25D366;color:#fff;border-radius:2px;border:none;cursor:pointer;
-  font-family:'Cormorant Garamond',serif;font-size:12px;text-transform:uppercase;letter-spacing:3px;
-  transition:background .3s,transform .3s;
+  width:100%;margin-top:20px;padding:16px;min-height:48px;
+  background:rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.88);
+  border-top:1px solid rgba(255,255,255,0.28);
+  border-left:1px solid rgba(255,255,255,0.10);
+  border-right:1px solid rgba(255,255,255,0.10);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  border-radius:4px;cursor:pointer;
+  font-family:'Cormorant Garamond',serif;font-size:11px;
+  text-transform:uppercase;letter-spacing:5px;
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  box-shadow:0 2px 0 rgba(255,255,255,0.08) inset,0 10px 40px rgba(0,0,0,0.45);
+  transition:background .3s,transform .25s;
+  position:relative;overflow:hidden;
 }
-.btn-wa:hover{background:#1da851;transform:translateY(-2px);}
+.btn-wa::before{
+  content:'';position:absolute;top:0;left:-130%;width:60%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,0.07) 50%,transparent);
+  animation:waShimmer 3.5s ease-in-out infinite 2.5s;pointer-events:none;
+}
+@keyframes waShimmer{0%{left:-130%;}50%{left:200%;}100%{left:200%;}}
+.btn-wa:hover{background:rgba(255,255,255,0.10);transform:translateY(-2px);}
 
 /* ── AVISO SIN NINOS ── */
 .aviso-card{
@@ -552,11 +593,14 @@ footer .fc{
   <section id="scd" class="rv">
     <div class="eyebrow">Faltan</div>
     <h2 class="sec-title">Cuenta Regresiva</h2>
-    <div class="cd-row">
-      <div class="cd-box"><div class="cd-num" id="cdD">000</div><div class="cd-lbl">Dias</div></div>
-      <div class="cd-box"><div class="cd-num" id="cdH">00</div><div class="cd-lbl">Horas</div></div>
-      <div class="cd-box"><div class="cd-num" id="cdM">00</div><div class="cd-lbl">Minutos</div></div>
-      <div class="cd-box"><div class="cd-num" id="cdS">00</div><div class="cd-lbl">Segundos</div></div>
+    <div class="cd-fugaz">
+      <div class="cd-seg"><span class="cd-n" id="cdD">000</span><span class="cd-l">Dias</span></div>
+      <span class="cd-colon">:</span>
+      <div class="cd-seg"><span class="cd-n" id="cdH">00</span><span class="cd-l">Horas</span></div>
+      <span class="cd-colon">:</span>
+      <div class="cd-seg"><span class="cd-n" id="cdM">00</span><span class="cd-l">Min</span></div>
+      <span class="cd-colon">:</span>
+      <div class="cd-seg"><span class="cd-n" id="cdS">00</span><span class="cd-l">Seg</span></div>
     </div>
   </section>
 
@@ -623,44 +667,44 @@ footer .fc{
     <h2 class="sec-title rv">Itinerario</h2>
     <div class="tl-zz">
 
-      <div class="tz-item rv">
-        <div class="tz-dot"></div>
-        <div class="tz-card">
-          <div class="tz-time">16:30</div>
-          <div class="tz-ev">Recepcion de Invitados</div>
+      <div class="tz-row rv">
+        <div class="tz-card-w l">
+          <div class="tz-card"><div class="tz-time">16:30</div><div class="tz-ev">Recepcion de Invitados</div></div>
+        </div>
+        <div class="tz-mid"><div class="tz-dot"></div></div>
+        <div class="tz-void"></div>
+      </div>
+
+      <div class="tz-row rv">
+        <div class="tz-void"></div>
+        <div class="tz-mid"><div class="tz-dot"></div></div>
+        <div class="tz-card-w r">
+          <div class="tz-card"><div class="tz-time">17:00</div><div class="tz-ev">Misa de Accion de Gracias</div></div>
         </div>
       </div>
 
-      <div class="tz-item rv">
-        <div class="tz-dot"></div>
-        <div class="tz-card">
-          <div class="tz-time">17:00</div>
-          <div class="tz-ev">Misa de Accion de Gracias</div>
+      <div class="tz-row rv">
+        <div class="tz-card-w l">
+          <div class="tz-card"><div class="tz-time">19:30</div><div class="tz-ev">Vals de Honor</div></div>
+        </div>
+        <div class="tz-mid"><div class="tz-dot"></div></div>
+        <div class="tz-void"></div>
+      </div>
+
+      <div class="tz-row rv">
+        <div class="tz-void"></div>
+        <div class="tz-mid"><div class="tz-dot"></div></div>
+        <div class="tz-card-w r">
+          <div class="tz-card"><div class="tz-time">20:00</div><div class="tz-ev">Cena y Brindis</div></div>
         </div>
       </div>
 
-      <div class="tz-item rv">
-        <div class="tz-dot"></div>
-        <div class="tz-card">
-          <div class="tz-time">19:30</div>
-          <div class="tz-ev">Vals de Honor</div>
+      <div class="tz-row rv">
+        <div class="tz-card-w l">
+          <div class="tz-card"><div class="tz-time">21:30</div><div class="tz-ev">Fiesta y Sorpresas</div></div>
         </div>
-      </div>
-
-      <div class="tz-item rv">
-        <div class="tz-dot"></div>
-        <div class="tz-card">
-          <div class="tz-time">20:00</div>
-          <div class="tz-ev">Cena y Brindis</div>
-        </div>
-      </div>
-
-      <div class="tz-item rv">
-        <div class="tz-dot"></div>
-        <div class="tz-card">
-          <div class="tz-time">21:30</div>
-          <div class="tz-ev">Fiesta y Sorpresas</div>
-        </div>
+        <div class="tz-mid"><div class="tz-dot"></div></div>
+        <div class="tz-void"></div>
       </div>
 
     </div>
@@ -755,49 +799,29 @@ footer .fc{
   <section class="rv" id="sgifts">
     <div class="eyebrow">Con Carino</div>
     <h2 class="sec-title">Mesa de Regalos</h2>
-    <div class="gift-grid">
+    <div class="gift-min">
 
-      <div class="gift-card rv">
-        <div class="gift-logo-wrap amazon">
-          <svg width="52" height="32" viewBox="0 0 120 38" fill="none">
-            <text x="4" y="22" font-family="Arial,sans-serif" font-size="22" font-weight="bold" fill="#fff">amazon</text>
-            <path d="M10 30 Q55 42 100 30" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <path d="M96 26 L100 30 L96 34" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="gift-body">
-          <div class="gb-name">Amazon</div>
-          <div class="gb-desc">Lista de deseos en linea</div>
-          <a class="btn-gift-link" href="https://www.amazon.com.mx" target="_blank">Ver lista &#8594;</a>
-        </div>
+      <div class="gift-min-item rv">
+        <div class="gm-name">Amazon</div>
+        <div class="gm-desc">Lista de deseos en linea</div>
+        <a class="gm-link" href="https://www.amazon.com.mx" target="_blank">Ver lista</a>
       </div>
 
-      <div class="gift-card rv">
-        <div class="gift-logo-wrap liverpool">
-          <svg width="62" height="28" viewBox="0 0 140 40" fill="none">
-            <text x="4" y="28" font-family="Arial,sans-serif" font-size="22" font-weight="900" fill="#fff" letter-spacing="1">LIVERPOOL</text>
-          </svg>
-        </div>
-        <div class="gift-body">
-          <div class="gb-name">Liverpool</div>
-          <div class="gb-desc">Mesa de regalos tienda</div>
-          <a class="btn-gift-link" href="https://mesaderegalos.liverpool.com.mx" target="_blank">Ver mesa &#8594;</a>
-        </div>
+      <div class="gm-rule rv"></div>
+
+      <div class="gift-min-item rv">
+        <div class="gm-name">Liverpool</div>
+        <div class="gm-desc">Mesa de regalos tienda</div>
+        <a class="gm-link" href="https://mesaderegalos.liverpool.com.mx" target="_blank">Ver mesa</a>
       </div>
 
-      <div class="gift-card rv">
-        <div class="gift-logo-wrap bank">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="#C0C0C0"><path d="M11.5 2L2 7v2h20V7L11.5 2zm-7 9v8H7v-8H4.5zm4.5 0v8h2v-8H9zm4 0v8h2v-8h-2zm4.5 0v8H19v-8h-1.5zM2 21v2h20v-2H2z"/></svg>
-        </div>
-        <div class="gift-body">
-          <div class="gb-name">Transferencia</div>
-          <div class="gb-desc">BBVA &middot; Cuenta de Carolina</div>
-          <div class="gb-account" id="accountNum">0123 4567 8901 2345</div>
-          <button class="btn-copy" id="copyBtn" onclick="copyAccount()">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-            Copiar numero
-          </button>
-        </div>
+      <div class="gm-rule rv"></div>
+
+      <div class="gift-min-item rv">
+        <div class="gm-name">Transferencia</div>
+        <div class="gm-desc">BBVA &middot; Cuenta de Carolina</div>
+        <div class="gm-account" id="accountNum">0123 4567 8901 2345</div>
+        <button class="gm-copy" id="copyBtn" onclick="copyAccount()">Copiar numero</button>
       </div>
 
     </div>
@@ -828,7 +852,7 @@ footer .fc{
       <label>Un mensaje para Carolina</label>
       <textarea id="rMsg" rows="3" placeholder="Escribe tus deseos..."></textarea>
       <button class="btn-wa" id="rsvpBtn" aria-label="Confirmar por WhatsApp">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,0.75)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413"/></svg>
         Confirmar por WhatsApp
       </button>
     </div>
@@ -1000,8 +1024,8 @@ function copyAccount(){
   navigator.clipboard.writeText(num).then(()=>{
     const btn=document.getElementById('copyBtn');
     const orig=btn.innerHTML;
-    btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Copiado!';
-    setTimeout(()=>{btn.innerHTML=orig;},2500);
+    btn.textContent='Copiado';
+    setTimeout(()=>{btn.textContent='Copiar numero';},2500);
   }).catch(()=>{
     const el=document.createElement('textarea');el.value=num;
     document.body.appendChild(el);el.select();document.execCommand('copy');el.remove();
