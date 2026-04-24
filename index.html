@@ -230,50 +230,61 @@ section{padding:60px 26px;}
 .cal-c p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(192,192,192,0.55);margin-bottom:18px;}
 
 /* ── ITINERARIO ZIGZAG + DESTELLOS ── */
-.tl-zz{position:relative;padding:10px 0;}
+.tl-zz{position:relative;padding:10px 0 4px;}
+/* Línea vertical central */
 .tl-zz::before{
   content:'';position:absolute;left:50%;transform:translateX(-0.5px);
   top:0;bottom:0;width:1px;
   background:linear-gradient(to bottom,
-    transparent,rgba(192,192,192,0.20) 6%,rgba(192,192,192,0.20) 94%,transparent);
+    transparent,rgba(192,192,192,0.22) 6%,rgba(192,192,192,0.22) 94%,transparent);
 }
-/* cada fila = flex con el dot siempre en el centro */
+/* Fila: position:relative para que el dot se ancle al 50% */
 .tz-row{
-  display:flex;align-items:center;
-  margin-bottom:22px;position:relative;
+  position:relative;
+  display:flex;
+  align-items:center;
+  min-height:76px;
+  margin-bottom:16px;
 }
-.tz-spacer{flex:1;}
-/* columna del dot — ancho fijo centrado sobre la linea */
+/* Tarjeta ocupa exactamente la mitad menos el hueco al dot */
+.tz-card-w{
+  width:calc(50% - 28px);
+  flex-shrink:0;
+}
+.tz-card-w.l{ /* tarjeta en la izquierda */
+  margin-right:auto;
+}
+.tz-card-w.r{ /* tarjeta en la derecha */
+  margin-left:auto;
+}
+/* Dot SIEMPRE en el centro absoluto de la fila */
 .tz-mid{
-  flex-shrink:0;width:12px;
-  display:flex;justify-content:center;align-items:center;
-  margin:0 14px;position:relative;z-index:3;
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  z-index:3;
 }
 .tz-dot{
-  width:10px;height:10px;border-radius:50%;
+  width:11px;height:11px;border-radius:50%;
   background:var(--accent);
-  box-shadow:0 0 0 3px var(--bg),0 0 0 5px rgba(192,192,192,0.28);
-  flex-shrink:0;position:relative;
+  box-shadow:0 0 0 3px var(--bg),0 0 0 5.5px rgba(192,192,192,0.30);
+  position:relative;display:block;
 }
 .tz-dot::before,.tz-dot::after{
   content:'';position:absolute;border-radius:50%;
-  border:1px solid rgba(192,192,192,0.50);
+  border:1px solid rgba(192,192,192,0.55);
   top:50%;left:50%;transform:translate(-50%,-50%);
-  animation:destello 2.6s ease-out infinite;
+  animation:destello 2.8s ease-out infinite;
 }
-.tz-dot::after{animation-delay:1.3s;}
+.tz-dot::after{animation-delay:1.4s;}
 @keyframes destello{
-  0%{width:10px;height:10px;opacity:.75;}
-  100%{width:42px;height:42px;opacity:0;}
+  0%{width:11px;height:11px;opacity:.8;}
+  100%{width:44px;height:44px;opacity:0;}
 }
-/* lado con tarjeta */
-.tz-card-w{flex:1;}
-.tz-card-w.l{padding-right:6px;}
-.tz-card-w.r{padding-left:6px;}
 .tz-card{
   background:rgba(255,255,255,0.025);
   border:1px solid rgba(192,192,192,0.13);
-  border-radius:4px;padding:13px 14px;
+  border-radius:4px;padding:13px 13px;
   box-shadow:0 4px 22px rgba(0,0,0,0.32);
   position:relative;overflow:hidden;
   display:block;width:100%;
@@ -283,7 +294,7 @@ section{padding:60px 26px;}
   background:linear-gradient(90deg,transparent,rgba(192,192,192,0.42) 50%,transparent);
 }
 .tz-time{
-  font-family:'Cormorant Garamond',serif;font-size:26px;
+  font-family:'Cormorant Garamond',serif;font-size:25px;
   color:var(--accent);letter-spacing:2px;line-height:1;font-weight:300;
 }
 .tz-ev{
@@ -383,7 +394,7 @@ section{padding:60px 26px;}
 .gm-link:hover{opacity:.65;}
 .gm-account{
   font-family:'Lato',sans-serif;font-size:14px;
-  color:var(--accent);letter-spacing:3px;margin-bottom:14px;
+  color:var(--text);letter-spacing:3px;margin-bottom:14px;
 }
 .gm-copy{
   font-family:'Cormorant Garamond',serif;font-size:10px;
@@ -497,7 +508,14 @@ footer .fc{
 #envelope-screen{position:fixed;inset:0;z-index:10000;overflow:hidden;cursor:pointer;opacity:0;background:#0D0D0D;}
 #env-image{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;z-index:2;}
 #env-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;z-index:3;opacity:0;}
-#env-flash{position:fixed;inset:0;background:#0D0D0D;z-index:9999;opacity:0;pointer-events:none;}
+#env-flash{
+  position:fixed;inset:0;z-index:9999;opacity:0;pointer-events:none;
+  background:radial-gradient(ellipse at center,
+    rgba(240,235,220,0.96) 0%,
+    rgba(200,196,188,0.92) 28%,
+    rgba(120,116,110,0.85) 58%,
+    rgba(13,13,13,1) 100%);
+}
 .envelope-hint{
   position:absolute;bottom:52px;left:50%;transform:translateX(-50%);
   font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:10px;text-transform:uppercase;
@@ -674,8 +692,8 @@ footer .fc{
     <h2 class="sec-title rv">Itinerario</h2>
     <div class="tl-zz">
 
-      <!-- IZQUIERDA: card | dot | spacer -->
-      <div class="tz-row rv">
+      <!-- IZQUIERDA -->
+      <div class="tz-row">
         <div class="tz-card-w l">
           <div class="tz-card">
             <div class="tz-time">16:30</div>
@@ -683,23 +701,21 @@ footer .fc{
           </div>
         </div>
         <div class="tz-mid"><div class="tz-dot"></div></div>
-        <div class="tz-spacer"></div>
       </div>
 
-      <!-- DERECHA: spacer | dot | card -->
-      <div class="tz-row rv">
-        <div class="tz-spacer"></div>
-        <div class="tz-mid"><div class="tz-dot"></div></div>
+      <!-- DERECHA -->
+      <div class="tz-row">
         <div class="tz-card-w r">
           <div class="tz-card">
             <div class="tz-time">17:00</div>
             <div class="tz-ev">Misa de Accion de Gracias</div>
           </div>
         </div>
+        <div class="tz-mid"><div class="tz-dot"></div></div>
       </div>
 
       <!-- IZQUIERDA -->
-      <div class="tz-row rv">
+      <div class="tz-row">
         <div class="tz-card-w l">
           <div class="tz-card">
             <div class="tz-time">19:30</div>
@@ -707,23 +723,21 @@ footer .fc{
           </div>
         </div>
         <div class="tz-mid"><div class="tz-dot"></div></div>
-        <div class="tz-spacer"></div>
       </div>
 
       <!-- DERECHA -->
-      <div class="tz-row rv">
-        <div class="tz-spacer"></div>
-        <div class="tz-mid"><div class="tz-dot"></div></div>
+      <div class="tz-row">
         <div class="tz-card-w r">
           <div class="tz-card">
             <div class="tz-time">20:00</div>
             <div class="tz-ev">Cena y Brindis</div>
           </div>
         </div>
+        <div class="tz-mid"><div class="tz-dot"></div></div>
       </div>
 
       <!-- IZQUIERDA -->
-      <div class="tz-row rv">
+      <div class="tz-row">
         <div class="tz-card-w l">
           <div class="tz-card">
             <div class="tz-time">21:30</div>
@@ -731,7 +745,6 @@ footer .fc{
           </div>
         </div>
         <div class="tz-mid"><div class="tz-dot"></div></div>
-        <div class="tz-spacer"></div>
       </div>
 
     </div>
@@ -815,14 +828,6 @@ footer .fc{
     </svg>
   </div>
 
-  <!-- AVISO SIN NINOS -->
-  <section class="rv" id="saviso">
-    <div class="aviso-card">
-      <div class="aviso-icon">&#9654;</div>
-      <div class="aviso-title">Evento Solo para Adultos</div>
-      <div class="aviso-text">Con mucho carino, esta celebracion esta pensada exclusivamente para adultos. Agradecemos su comprension.</div>
-    </div>
-  </section>
 
   <!-- MESA DE REGALOS -->
   <section class="rv" id="sgifts">
@@ -930,13 +935,13 @@ gsap.registerPlugin(ScrollTrigger);
   }
   function revealInvitation(){
     prepareInvitation();
-    gsap.to(envFlash,{opacity:0,duration:1.2,ease:'power2.out',
+    gsap.to(envFlash,{opacity:0,duration:2.0,ease:'power2.out',
       onComplete(){envFlash.style.display='none';}});
   }
   envVideo.addEventListener('timeupdate',function(){
-    if(!flashStarted&&envVideo.duration&&envVideo.currentTime>=envVideo.duration-2){
+    if(!flashStarted&&envVideo.duration&&envVideo.currentTime>=envVideo.duration-1.8){
       flashStarted=true;
-      gsap.to(envFlash,{opacity:1,duration:1,ease:'power2.in',onComplete:revealInvitation});
+      gsap.to(envFlash,{opacity:1,duration:1.4,ease:'power1.inOut',onComplete:revealInvitation});
     }
   });
   envVideo.addEventListener('ended',function(){gsap.set(envFlash,{opacity:1});revealInvitation();});
@@ -986,11 +991,16 @@ function initScrollReveal(){
 
 /* ── ITINERARIO ZIGZAG ── */
 function initItinerary(){
-  document.querySelectorAll('.tz-row').forEach((row,i)=>{
-    const dir=i%2===0?-1:1;
-    gsap.fromTo(row,{x:dir*30,opacity:0},{x:0,opacity:1,duration:1.0,ease:'power2.out',
-      delay:i*0.12,
-      scrollTrigger:{trigger:'#siti',start:'top 82%'}});
+  const rows=document.querySelectorAll('.tz-row');
+  rows.forEach(r=>gsap.set(r,{opacity:0}));
+  rows.forEach((row,i)=>{
+    /* filas pares vienen de la izquierda, impares de la derecha */
+    const dir=i%2===0?-40:40;
+    gsap.to(row,{x:0,opacity:1,duration:1.05,ease:'power2.out',
+      delay:i*0.13,
+      scrollTrigger:{trigger:'#siti',start:'top 80%'},
+      onStart(){gsap.set(row,{x:dir});}
+    });
   });
 }
 
