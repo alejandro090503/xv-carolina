@@ -230,53 +230,60 @@ section{padding:60px 26px;}
 .cal-c p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(192,192,192,0.55);margin-bottom:18px;}
 
 /* ── ITINERARIO ZIGZAG + DESTELLOS ── */
-.tl-zz{position:relative;padding:8px 0;}
+.tl-zz{position:relative;padding:10px 0;}
 .tl-zz::before{
   content:'';position:absolute;left:50%;transform:translateX(-0.5px);
   top:0;bottom:0;width:1px;
-  background:linear-gradient(to bottom,transparent,rgba(192,192,192,0.18) 8%,rgba(192,192,192,0.18) 92%,transparent);
+  background:linear-gradient(to bottom,
+    transparent,rgba(192,192,192,0.20) 6%,rgba(192,192,192,0.20) 94%,transparent);
 }
+/* cada fila = flex con el dot siempre en el centro */
 .tz-row{
-  display:grid;grid-template-columns:1fr 40px 1fr;
-  margin-bottom:28px;align-items:start;
+  display:flex;align-items:center;
+  margin-bottom:22px;position:relative;
 }
-.tz-card-w{padding:0 10px;}
-.tz-card-w.l{text-align:right;}
-.tz-card-w.r{text-align:left;}
+.tz-spacer{flex:1;}
+/* columna del dot — ancho fijo centrado sobre la linea */
 .tz-mid{
-  display:flex;justify-content:center;padding-top:14px;
+  flex-shrink:0;width:12px;
+  display:flex;justify-content:center;align-items:center;
+  margin:0 14px;position:relative;z-index:3;
 }
-.tz-void{}
 .tz-dot{
   width:10px;height:10px;border-radius:50%;
   background:var(--accent);
-  box-shadow:0 0 0 3px var(--bg),0 0 0 4.5px rgba(192,192,192,0.28);
-  position:relative;z-index:2;flex-shrink:0;
+  box-shadow:0 0 0 3px var(--bg),0 0 0 5px rgba(192,192,192,0.28);
+  flex-shrink:0;position:relative;
 }
 .tz-dot::before,.tz-dot::after{
   content:'';position:absolute;border-radius:50%;
-  border:1px solid rgba(192,192,192,0.45);
+  border:1px solid rgba(192,192,192,0.50);
   top:50%;left:50%;transform:translate(-50%,-50%);
   animation:destello 2.6s ease-out infinite;
 }
 .tz-dot::after{animation-delay:1.3s;}
 @keyframes destello{
-  0%{width:10px;height:10px;opacity:.7;}
-  100%{width:38px;height:38px;opacity:0;}
+  0%{width:10px;height:10px;opacity:.75;}
+  100%{width:42px;height:42px;opacity:0;}
 }
+/* lado con tarjeta */
+.tz-card-w{flex:1;}
+.tz-card-w.l{padding-right:6px;}
+.tz-card-w.r{padding-left:6px;}
 .tz-card{
-  background:rgba(255,255,255,0.022);
-  border:1px solid var(--border);
-  border-radius:4px;padding:14px 14px;
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(192,192,192,0.13);
+  border-radius:4px;padding:13px 14px;
   box-shadow:0 4px 22px rgba(0,0,0,0.32);
-  position:relative;overflow:hidden;display:inline-block;width:100%;
+  position:relative;overflow:hidden;
+  display:block;width:100%;
 }
 .tz-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(192,192,192,0.35) 50%,transparent);
+  background:linear-gradient(90deg,transparent,rgba(192,192,192,0.42) 50%,transparent);
 }
 .tz-time{
-  font-family:'Cormorant Garamond',serif;font-size:28px;
+  font-family:'Cormorant Garamond',serif;font-size:26px;
   color:var(--accent);letter-spacing:2px;line-height:1;font-weight:300;
 }
 .tz-ev{
@@ -480,9 +487,9 @@ footer .fc{
   animation:fabpulse 3s infinite ease-out;
 }
 @keyframes fabpulse{
-  0%{box-shadow:0 0 0 0 rgba(192,192,192,0.28);}
-  70%{box-shadow:0 0 0 16px rgba(192,192,192,0);}
-  100%{box-shadow:0 0 0 0 rgba(192,192,192,0);}
+  0%{box-shadow:0 0 0 0 rgba(255,255,255,0.55),0 4px 22px rgba(0,0,0,0.55);}
+  70%{box-shadow:0 0 0 22px rgba(255,255,255,0),0 4px 22px rgba(0,0,0,0.55);}
+  100%{box-shadow:0 0 0 0 rgba(255,255,255,0),0 4px 22px rgba(0,0,0,0.55);}
 }
 .music-fab svg{width:22px;height:22px;}
 
@@ -667,44 +674,64 @@ footer .fc{
     <h2 class="sec-title rv">Itinerario</h2>
     <div class="tl-zz">
 
+      <!-- IZQUIERDA: card | dot | spacer -->
       <div class="tz-row rv">
         <div class="tz-card-w l">
-          <div class="tz-card"><div class="tz-time">16:30</div><div class="tz-ev">Recepcion de Invitados</div></div>
+          <div class="tz-card">
+            <div class="tz-time">16:30</div>
+            <div class="tz-ev">Recepcion de Invitados</div>
+          </div>
         </div>
         <div class="tz-mid"><div class="tz-dot"></div></div>
-        <div class="tz-void"></div>
+        <div class="tz-spacer"></div>
       </div>
 
+      <!-- DERECHA: spacer | dot | card -->
       <div class="tz-row rv">
-        <div class="tz-void"></div>
+        <div class="tz-spacer"></div>
         <div class="tz-mid"><div class="tz-dot"></div></div>
         <div class="tz-card-w r">
-          <div class="tz-card"><div class="tz-time">17:00</div><div class="tz-ev">Misa de Accion de Gracias</div></div>
+          <div class="tz-card">
+            <div class="tz-time">17:00</div>
+            <div class="tz-ev">Misa de Accion de Gracias</div>
+          </div>
         </div>
       </div>
 
+      <!-- IZQUIERDA -->
       <div class="tz-row rv">
         <div class="tz-card-w l">
-          <div class="tz-card"><div class="tz-time">19:30</div><div class="tz-ev">Vals de Honor</div></div>
+          <div class="tz-card">
+            <div class="tz-time">19:30</div>
+            <div class="tz-ev">Vals de Honor</div>
+          </div>
         </div>
         <div class="tz-mid"><div class="tz-dot"></div></div>
-        <div class="tz-void"></div>
+        <div class="tz-spacer"></div>
       </div>
 
+      <!-- DERECHA -->
       <div class="tz-row rv">
-        <div class="tz-void"></div>
+        <div class="tz-spacer"></div>
         <div class="tz-mid"><div class="tz-dot"></div></div>
         <div class="tz-card-w r">
-          <div class="tz-card"><div class="tz-time">20:00</div><div class="tz-ev">Cena y Brindis</div></div>
+          <div class="tz-card">
+            <div class="tz-time">20:00</div>
+            <div class="tz-ev">Cena y Brindis</div>
+          </div>
         </div>
       </div>
 
+      <!-- IZQUIERDA -->
       <div class="tz-row rv">
         <div class="tz-card-w l">
-          <div class="tz-card"><div class="tz-time">21:30</div><div class="tz-ev">Fiesta y Sorpresas</div></div>
+          <div class="tz-card">
+            <div class="tz-time">21:30</div>
+            <div class="tz-ev">Fiesta y Sorpresas</div>
+          </div>
         </div>
         <div class="tz-mid"><div class="tz-dot"></div></div>
-        <div class="tz-void"></div>
+        <div class="tz-spacer"></div>
       </div>
 
     </div>
@@ -769,11 +796,13 @@ footer .fc{
       <div class="gal-item"><img src="./foto2.png" alt="Carolina" loading="lazy"></div>
       <div class="gal-item"><img src="./foto3.png" alt="Carolina" loading="lazy"></div>
       <div class="gal-item"><img src="./foto4.png" alt="Carolina" loading="lazy"></div>
+      <div class="gal-item"><img src="./foto5.png" alt="Carolina" loading="lazy"></div>
       <div class="gal-dots">
         <div class="gal-dot" id="dot0"></div>
         <div class="gal-dot" id="dot1"></div>
         <div class="gal-dot" id="dot2"></div>
         <div class="gal-dot" id="dot3"></div>
+        <div class="gal-dot" id="dot4"></div>
       </div>
     </div>
   </section>
@@ -957,11 +986,11 @@ function initScrollReveal(){
 
 /* ── ITINERARIO ZIGZAG ── */
 function initItinerary(){
-  document.querySelectorAll('.tz-item').forEach((item,i)=>{
+  document.querySelectorAll('.tz-row').forEach((row,i)=>{
     const dir=i%2===0?-1:1;
-    gsap.fromTo(item,{x:dir*28,opacity:0},{x:0,opacity:1,duration:0.9,ease:'power2.out',
-      delay:i*0.10,
-      scrollTrigger:{trigger:'#siti',start:'top 80%'}});
+    gsap.fromTo(row,{x:dir*30,opacity:0},{x:0,opacity:1,duration:1.0,ease:'power2.out',
+      delay:i*0.12,
+      scrollTrigger:{trigger:'#siti',start:'top 82%'}});
   });
 }
 
