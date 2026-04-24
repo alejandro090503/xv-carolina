@@ -229,28 +229,52 @@ section{padding:60px 26px;}
 .cal-c{text-align:center;}
 .cal-c p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(192,192,192,0.55);margin-bottom:18px;}
 
-/* ── ITINERARIO MOMENTOS ── */
-.iti-list{padding:4px 0;}
-.iti-item{padding:26px 0;text-align:center;}
-.iti-orn{display:block;margin:0 auto 12px;width:80px;height:10px;}
+/* ── ITINERARIO ZIGZAG SVG ── */
+.iti-zz{position:relative;padding:4px 0;}
+.iti-svg{
+  position:absolute;left:0;top:0;width:100%;height:100%;
+  pointer-events:none;overflow:visible;
+}
+.iti-polyline{fill:none;stroke:rgba(192,192,192,0.22);stroke-width:1;}
+.iti-row{
+  display:flex;align-items:center;
+  min-height:96px;padding:6px 0;
+}
+.iti-r{flex-direction:row-reverse;}
+.iti-dot-wrap{
+  flex-shrink:0;width:48px;height:48px;
+  display:flex;align-items:center;justify-content:center;
+}
+.iti-dot{
+  width:11px;height:11px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 3px var(--bg),0 0 0 5.5px rgba(192,192,192,0.28);
+  position:relative;opacity:0;transform:scale(0);
+}
+.iti-dot::before,.iti-dot::after{
+  content:'';position:absolute;border-radius:50%;
+  border:1px solid rgba(192,192,192,0.50);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:destello 2.6s ease-out infinite;
+}
+.iti-dot::after{animation-delay:1.3s;}
+@keyframes destello{
+  0%{width:11px;height:11px;opacity:.75;}
+  100%{width:44px;height:44px;opacity:0;}
+}
+.iti-content{flex:1;padding:0 8px;}
 .iti-time{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(50px,15vw,74px);
-  font-weight:300;line-height:1;letter-spacing:5px;
+  font-size:clamp(28px,9vw,40px);
+  font-weight:300;line-height:1;letter-spacing:3px;
   color:transparent;
-  -webkit-text-stroke:1px rgba(192,192,192,0.60);
-  font-variant-numeric:tabular-nums;
-  display:block;
+  -webkit-text-stroke:1px rgba(192,192,192,0.62);
+  font-variant-numeric:tabular-nums;display:block;
 }
 .iti-ev{
-  font-family:'Lato',sans-serif;font-size:9px;letter-spacing:4.5px;
-  text-transform:uppercase;color:rgba(192,192,192,0.48);
-  margin-top:12px;line-height:1.6;
-}
-.iti-sep{
-  height:1px;
-  background:linear-gradient(to right,
-    transparent,rgba(192,192,192,0.18) 25%,rgba(192,192,192,0.18) 75%,transparent);
+  font-family:'Lato',sans-serif;font-size:9px;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(192,192,192,0.46);
+  margin-top:8px;line-height:1.6;
 }
 
 /* ── ESTRELLAS DE FONDO ANIMADAS ── */
@@ -655,44 +679,56 @@ footer .fc{
   <section id="siti">
     <div class="eyebrow rv">Programa del Dia</div>
     <h2 class="sec-title rv">Itinerario</h2>
-    <div class="iti-list">
+    <div class="iti-zz" id="itiZz">
 
-      <div class="iti-item">
-        <svg class="iti-orn" viewBox="0 0 80 10" fill="none"><line x1="0" y1="5" x2="33" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/><rect x="37" y="2" width="6" height="6" fill="none" stroke="#C0C0C0" stroke-width=".9" opacity=".45" transform="rotate(45 40 5)"/><line x1="47" y1="5" x2="80" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/></svg>
-        <div class="iti-time">16:30</div>
-        <div class="iti-ev">Recepcion de Invitados</div>
+      <!-- SVG: la línea zigzag se dibuja por JS -->
+      <svg class="iti-svg" id="itiSvg" aria-hidden="true">
+        <polyline class="iti-polyline" id="itiPolyline" points="0,0"/>
+      </svg>
+
+      <!-- IZQUIERDA -->
+      <div class="iti-row">
+        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
+        <div class="iti-content">
+          <div class="iti-time">16:30</div>
+          <div class="iti-ev">Recepcion de Invitados</div>
+        </div>
       </div>
 
-      <div class="iti-sep"></div>
-
-      <div class="iti-item">
-        <svg class="iti-orn" viewBox="0 0 80 10" fill="none"><line x1="0" y1="5" x2="33" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/><rect x="37" y="2" width="6" height="6" fill="none" stroke="#C0C0C0" stroke-width=".9" opacity=".45" transform="rotate(45 40 5)"/><line x1="47" y1="5" x2="80" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/></svg>
-        <div class="iti-time">17:00</div>
-        <div class="iti-ev">Misa de Accion de Gracias</div>
+      <!-- DERECHA -->
+      <div class="iti-row iti-r">
+        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
+        <div class="iti-content">
+          <div class="iti-time">17:00</div>
+          <div class="iti-ev">Misa de Accion de Gracias</div>
+        </div>
       </div>
 
-      <div class="iti-sep"></div>
-
-      <div class="iti-item">
-        <svg class="iti-orn" viewBox="0 0 80 10" fill="none"><line x1="0" y1="5" x2="33" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/><rect x="37" y="2" width="6" height="6" fill="none" stroke="#C0C0C0" stroke-width=".9" opacity=".45" transform="rotate(45 40 5)"/><line x1="47" y1="5" x2="80" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/></svg>
-        <div class="iti-time">19:30</div>
-        <div class="iti-ev">Vals de Honor</div>
+      <!-- IZQUIERDA -->
+      <div class="iti-row">
+        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
+        <div class="iti-content">
+          <div class="iti-time">19:30</div>
+          <div class="iti-ev">Vals de Honor</div>
+        </div>
       </div>
 
-      <div class="iti-sep"></div>
-
-      <div class="iti-item">
-        <svg class="iti-orn" viewBox="0 0 80 10" fill="none"><line x1="0" y1="5" x2="33" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/><rect x="37" y="2" width="6" height="6" fill="none" stroke="#C0C0C0" stroke-width=".9" opacity=".45" transform="rotate(45 40 5)"/><line x1="47" y1="5" x2="80" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/></svg>
-        <div class="iti-time">20:00</div>
-        <div class="iti-ev">Cena y Brindis</div>
+      <!-- DERECHA -->
+      <div class="iti-row iti-r">
+        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
+        <div class="iti-content">
+          <div class="iti-time">20:00</div>
+          <div class="iti-ev">Cena y Brindis</div>
+        </div>
       </div>
 
-      <div class="iti-sep"></div>
-
-      <div class="iti-item">
-        <svg class="iti-orn" viewBox="0 0 80 10" fill="none"><line x1="0" y1="5" x2="33" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/><rect x="37" y="2" width="6" height="6" fill="none" stroke="#C0C0C0" stroke-width=".9" opacity=".45" transform="rotate(45 40 5)"/><line x1="47" y1="5" x2="80" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/></svg>
-        <div class="iti-time">21:30</div>
-        <div class="iti-ev">Fiesta y Sorpresas</div>
+      <!-- IZQUIERDA -->
+      <div class="iti-row">
+        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
+        <div class="iti-content">
+          <div class="iti-time">21:30</div>
+          <div class="iti-ev">Fiesta y Sorpresas</div>
+        </div>
       </div>
 
     </div>
@@ -888,9 +924,9 @@ gsap.registerPlugin(ScrollTrigger);
       onComplete(){envFlash.style.display='none';}});
   }
   envVideo.addEventListener('timeupdate',function(){
-    if(!flashStarted&&envVideo.duration&&envVideo.currentTime>=envVideo.duration-2.6){
+    if(!flashStarted&&envVideo.duration&&envVideo.currentTime>=envVideo.duration-8){
       flashStarted=true;
-      gsap.to(envFlash,{opacity:1,duration:2.2,ease:'power1.inOut',onComplete:revealInvitation});
+      gsap.to(envFlash,{opacity:1,duration:5,ease:'power1.inOut',onComplete:revealInvitation});
     }
   });
   envVideo.addEventListener('ended',function(){gsap.set(envFlash,{opacity:1});revealInvitation();});
@@ -922,8 +958,8 @@ function launchPage(){
 /* ── ESTRELLAS DE FONDO ── */
 function initBgStars(){
   const c=document.getElementById('bgStars');
-  const h=document.querySelector('.wrap').scrollHeight||6000;
-  for(var i=0;i<55;i++){
+  const h=document.querySelector('.wrap').scrollHeight||8000;
+  for(var i=0;i<220;i++){
     var s=document.createElement('div');
     s.className='bg-star';
     var sz=(Math.random()*1.8+0.4).toFixed(1);
@@ -957,14 +993,52 @@ function initScrollReveal(){
   });
 }
 
-/* ── ITINERARIO MOMENTOS ── */
+/* ── ITINERARIO ZIGZAG SVG ── */
 function initItinerary(){
-  document.querySelectorAll('.iti-item').forEach((item,i)=>{
-    gsap.fromTo(item,
-      {y:28,opacity:0},
-      {y:0,opacity:1,duration:1.1,ease:'power2.out',
-       delay:i*0.18,
-       scrollTrigger:{trigger:'#siti',start:'top 82%'}});
+  requestAnimationFrame(function(){
+    const zz=document.getElementById('itiZz');
+    const poly=document.getElementById('itiPolyline');
+    const dotWraps=zz.querySelectorAll('.iti-dot-wrap');
+    const dotEls=zz.querySelectorAll('.iti-dot');
+    const rows=zz.querySelectorAll('.iti-row');
+
+    /* posiciones de cada punto relativas al contenedor */
+    const zzRect=zz.getBoundingClientRect();
+    const pts=[];
+    dotWraps.forEach(function(dw){
+      const r=dw.getBoundingClientRect();
+      const x=r.left+r.width/2-zzRect.left;
+      const y=r.top+r.height/2-zzRect.top;
+      pts.push(x+','+y);
+    });
+    poly.setAttribute('points',pts.join(' '));
+
+    /* animar línea al hacer scroll (stroke-dashoffset) */
+    const len=poly.getTotalLength()||600;
+    gsap.set(poly,{strokeDasharray:len,strokeDashoffset:len});
+    gsap.to(poly,{
+      strokeDashoffset:0,ease:'none',
+      scrollTrigger:{trigger:'#siti',start:'top 75%',end:'bottom 65%',scrub:1}
+    });
+
+    /* animar cada dot cuando aparece en pantalla */
+    dotEls.forEach(function(dot,i){
+      gsap.to(dot,{
+        scale:1,opacity:1,duration:0.55,ease:'back.out(2.2)',
+        scrollTrigger:{trigger:rows[i],start:'top 84%',toggleActions:'play none none none'}
+      });
+    });
+
+    /* contenido: entra desde su lado */
+    rows.forEach(function(row,i){
+      const content=row.querySelector('.iti-content');
+      const dir=row.classList.contains('iti-r')?20:-20;
+      gsap.fromTo(content,
+        {x:dir,opacity:0},
+        {x:0,opacity:1,duration:0.9,ease:'power2.out',
+         scrollTrigger:{trigger:row,start:'top 86%'}}
+      );
+    });
   });
 }
 
