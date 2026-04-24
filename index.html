@@ -229,78 +229,39 @@ section{padding:60px 26px;}
 .cal-c{text-align:center;}
 .cal-c p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(192,192,192,0.55);margin-bottom:18px;}
 
-/* ── ITINERARIO ZIGZAG + DESTELLOS ── */
-.tl-zz{position:relative;padding:10px 0 4px;}
-/* Línea vertical central */
-.tl-zz::before{
-  content:'';position:absolute;left:50%;transform:translateX(-0.5px);
-  top:0;bottom:0;width:1px;
-  background:linear-gradient(to bottom,
-    transparent,rgba(192,192,192,0.22) 6%,rgba(192,192,192,0.22) 94%,transparent);
+/* ── ITINERARIO MOMENTOS ── */
+.iti-list{padding:4px 0;}
+.iti-item{padding:26px 0;text-align:center;}
+.iti-orn{display:block;margin:0 auto 12px;width:80px;height:10px;}
+.iti-time{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(50px,15vw,74px);
+  font-weight:300;line-height:1;letter-spacing:5px;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(192,192,192,0.60);
+  font-variant-numeric:tabular-nums;
+  display:block;
 }
-/* Fila: position:relative para que el dot se ancle al 50% */
-.tz-row{
-  position:relative;
-  display:flex;
-  align-items:center;
-  min-height:76px;
-  margin-bottom:16px;
+.iti-ev{
+  font-family:'Lato',sans-serif;font-size:9px;letter-spacing:4.5px;
+  text-transform:uppercase;color:rgba(192,192,192,0.48);
+  margin-top:12px;line-height:1.6;
 }
-/* Tarjeta ocupa exactamente la mitad menos el hueco al dot */
-.tz-card-w{
-  width:calc(50% - 28px);
-  flex-shrink:0;
+.iti-sep{
+  height:1px;
+  background:linear-gradient(to right,
+    transparent,rgba(192,192,192,0.18) 25%,rgba(192,192,192,0.18) 75%,transparent);
 }
-.tz-card-w.l{ /* tarjeta en la izquierda */
-  margin-right:auto;
+
+/* ── ESTRELLAS DE FONDO ANIMADAS ── */
+#bgStars{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.bg-star{
+  position:absolute;border-radius:50%;
+  background:rgba(192,192,192,0.80);
+  animation:twinkle var(--dur,3s) ease-in-out infinite;
+  animation-delay:var(--dl,0s);
 }
-.tz-card-w.r{ /* tarjeta en la derecha */
-  margin-left:auto;
-}
-/* Dot SIEMPRE en el centro absoluto de la fila */
-.tz-mid{
-  position:absolute;
-  left:50%;top:50%;
-  transform:translate(-50%,-50%);
-  z-index:3;
-}
-.tz-dot{
-  width:11px;height:11px;border-radius:50%;
-  background:var(--accent);
-  box-shadow:0 0 0 3px var(--bg),0 0 0 5.5px rgba(192,192,192,0.30);
-  position:relative;display:block;
-}
-.tz-dot::before,.tz-dot::after{
-  content:'';position:absolute;border-radius:50%;
-  border:1px solid rgba(192,192,192,0.55);
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  animation:destello 2.8s ease-out infinite;
-}
-.tz-dot::after{animation-delay:1.4s;}
-@keyframes destello{
-  0%{width:11px;height:11px;opacity:.8;}
-  100%{width:44px;height:44px;opacity:0;}
-}
-.tz-card{
-  background:rgba(255,255,255,0.025);
-  border:1px solid rgba(192,192,192,0.13);
-  border-radius:4px;padding:13px 13px;
-  box-shadow:0 4px 22px rgba(0,0,0,0.32);
-  position:relative;overflow:hidden;
-  display:block;width:100%;
-}
-.tz-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(192,192,192,0.42) 50%,transparent);
-}
-.tz-time{
-  font-family:'Cormorant Garamond',serif;font-size:25px;
-  color:var(--accent);letter-spacing:2px;line-height:1;font-weight:300;
-}
-.tz-ev{
-  font-family:'Lato',sans-serif;font-size:9px;letter-spacing:2px;
-  text-transform:uppercase;color:rgba(192,192,192,0.50);margin-top:5px;line-height:1.4;
-}
+.content-layer{position:relative;z-index:1;}
 
 /* ── DRESS CODE ── */
 .dc-note{
@@ -510,10 +471,12 @@ footer .fc{
 #env-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;z-index:3;opacity:0;}
 #env-flash{
   position:fixed;inset:0;z-index:9999;opacity:0;pointer-events:none;
-  background:radial-gradient(ellipse at center,
-    rgba(240,235,220,0.96) 0%,
-    rgba(200,196,188,0.92) 28%,
-    rgba(120,116,110,0.85) 58%,
+  background:radial-gradient(ellipse at 50% 48%,
+    rgba(255,255,255,1.00) 0%,
+    rgba(255,253,248,0.98) 12%,
+    rgba(235,232,225,0.94) 32%,
+    rgba(160,156,150,0.88) 58%,
+    rgba(40,38,35,0.96) 80%,
     rgba(13,13,13,1) 100%);
 }
 .envelope-hint{
@@ -575,6 +538,8 @@ footer .fc{
 </div>
 
 <div class="wrap" style="visibility:hidden">
+<div id="bgStars"></div>
+<div class="content-layer">
 
   <!-- HERO -->
   <section class="hero" style="padding:0;">
@@ -690,61 +655,44 @@ footer .fc{
   <section id="siti">
     <div class="eyebrow rv">Programa del Dia</div>
     <h2 class="sec-title rv">Itinerario</h2>
-    <div class="tl-zz">
+    <div class="iti-list">
 
-      <!-- IZQUIERDA -->
-      <div class="tz-row">
-        <div class="tz-card-w l">
-          <div class="tz-card">
-            <div class="tz-time">16:30</div>
-            <div class="tz-ev">Recepcion de Invitados</div>
-          </div>
-        </div>
-        <div class="tz-mid"><div class="tz-dot"></div></div>
+      <div class="iti-item">
+        <svg class="iti-orn" viewBox="0 0 80 10" fill="none"><line x1="0" y1="5" x2="33" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/><rect x="37" y="2" width="6" height="6" fill="none" stroke="#C0C0C0" stroke-width=".9" opacity=".45" transform="rotate(45 40 5)"/><line x1="47" y1="5" x2="80" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/></svg>
+        <div class="iti-time">16:30</div>
+        <div class="iti-ev">Recepcion de Invitados</div>
       </div>
 
-      <!-- DERECHA -->
-      <div class="tz-row">
-        <div class="tz-card-w r">
-          <div class="tz-card">
-            <div class="tz-time">17:00</div>
-            <div class="tz-ev">Misa de Accion de Gracias</div>
-          </div>
-        </div>
-        <div class="tz-mid"><div class="tz-dot"></div></div>
+      <div class="iti-sep"></div>
+
+      <div class="iti-item">
+        <svg class="iti-orn" viewBox="0 0 80 10" fill="none"><line x1="0" y1="5" x2="33" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/><rect x="37" y="2" width="6" height="6" fill="none" stroke="#C0C0C0" stroke-width=".9" opacity=".45" transform="rotate(45 40 5)"/><line x1="47" y1="5" x2="80" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/></svg>
+        <div class="iti-time">17:00</div>
+        <div class="iti-ev">Misa de Accion de Gracias</div>
       </div>
 
-      <!-- IZQUIERDA -->
-      <div class="tz-row">
-        <div class="tz-card-w l">
-          <div class="tz-card">
-            <div class="tz-time">19:30</div>
-            <div class="tz-ev">Vals de Honor</div>
-          </div>
-        </div>
-        <div class="tz-mid"><div class="tz-dot"></div></div>
+      <div class="iti-sep"></div>
+
+      <div class="iti-item">
+        <svg class="iti-orn" viewBox="0 0 80 10" fill="none"><line x1="0" y1="5" x2="33" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/><rect x="37" y="2" width="6" height="6" fill="none" stroke="#C0C0C0" stroke-width=".9" opacity=".45" transform="rotate(45 40 5)"/><line x1="47" y1="5" x2="80" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/></svg>
+        <div class="iti-time">19:30</div>
+        <div class="iti-ev">Vals de Honor</div>
       </div>
 
-      <!-- DERECHA -->
-      <div class="tz-row">
-        <div class="tz-card-w r">
-          <div class="tz-card">
-            <div class="tz-time">20:00</div>
-            <div class="tz-ev">Cena y Brindis</div>
-          </div>
-        </div>
-        <div class="tz-mid"><div class="tz-dot"></div></div>
+      <div class="iti-sep"></div>
+
+      <div class="iti-item">
+        <svg class="iti-orn" viewBox="0 0 80 10" fill="none"><line x1="0" y1="5" x2="33" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/><rect x="37" y="2" width="6" height="6" fill="none" stroke="#C0C0C0" stroke-width=".9" opacity=".45" transform="rotate(45 40 5)"/><line x1="47" y1="5" x2="80" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/></svg>
+        <div class="iti-time">20:00</div>
+        <div class="iti-ev">Cena y Brindis</div>
       </div>
 
-      <!-- IZQUIERDA -->
-      <div class="tz-row">
-        <div class="tz-card-w l">
-          <div class="tz-card">
-            <div class="tz-time">21:30</div>
-            <div class="tz-ev">Fiesta y Sorpresas</div>
-          </div>
-        </div>
-        <div class="tz-mid"><div class="tz-dot"></div></div>
+      <div class="iti-sep"></div>
+
+      <div class="iti-item">
+        <svg class="iti-orn" viewBox="0 0 80 10" fill="none"><line x1="0" y1="5" x2="33" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/><rect x="37" y="2" width="6" height="6" fill="none" stroke="#C0C0C0" stroke-width=".9" opacity=".45" transform="rotate(45 40 5)"/><line x1="47" y1="5" x2="80" y2="5" stroke="#C0C0C0" stroke-width=".5" opacity=".20"/></svg>
+        <div class="iti-time">21:30</div>
+        <div class="iti-ev">Fiesta y Sorpresas</div>
       </div>
 
     </div>
@@ -899,7 +847,8 @@ footer .fc{
     <div class="fc">@elysium.invitaciones</div>
   </footer>
 
-</div>
+</div><!-- /content-layer -->
+</div><!-- /wrap -->
 
 <!-- MUSICA -->
 <button class="music-fab" id="musicFab" aria-label="Reproducir musica">
@@ -935,13 +884,13 @@ gsap.registerPlugin(ScrollTrigger);
   }
   function revealInvitation(){
     prepareInvitation();
-    gsap.to(envFlash,{opacity:0,duration:2.0,ease:'power2.out',
+    gsap.to(envFlash,{opacity:0,duration:3.5,ease:'power2.out',
       onComplete(){envFlash.style.display='none';}});
   }
   envVideo.addEventListener('timeupdate',function(){
-    if(!flashStarted&&envVideo.duration&&envVideo.currentTime>=envVideo.duration-1.8){
+    if(!flashStarted&&envVideo.duration&&envVideo.currentTime>=envVideo.duration-2.6){
       flashStarted=true;
-      gsap.to(envFlash,{opacity:1,duration:1.4,ease:'power1.inOut',onComplete:revealInvitation});
+      gsap.to(envFlash,{opacity:1,duration:2.2,ease:'power1.inOut',onComplete:revealInvitation});
     }
   });
   envVideo.addEventListener('ended',function(){gsap.set(envFlash,{opacity:1});revealInvitation();});
@@ -960,6 +909,7 @@ gsap.registerPlugin(ScrollTrigger);
 /* ── LAUNCH ── */
 function launchPage(){
   initHeroStars();
+  initBgStars();
   gsap.timeline({defaults:{ease:'power2.out'}})
     .to('#hNm',{opacity:1,y:0,duration:2.0,ease:'power3.out'})
     .to('#hSb',{opacity:1,y:0,duration:1.4},'-=1.1');
@@ -967,6 +917,24 @@ function launchPage(){
   initItinerary();
   initGallery();
   initDressCode();
+}
+
+/* ── ESTRELLAS DE FONDO ── */
+function initBgStars(){
+  const c=document.getElementById('bgStars');
+  const h=document.querySelector('.wrap').scrollHeight||6000;
+  for(var i=0;i<55;i++){
+    var s=document.createElement('div');
+    s.className='bg-star';
+    var sz=(Math.random()*1.8+0.4).toFixed(1);
+    s.style.cssText=
+      'left:'+Math.random()*100+'%;'+
+      'top:'+Math.floor(Math.random()*h)+'px;'+
+      'width:'+sz+'px;height:'+sz+'px;'+
+      '--dur:'+(Math.random()*4+2.5).toFixed(1)+'s;'+
+      '--dl:'+(Math.random()*8).toFixed(1)+'s;';
+    c.appendChild(s);
+  }
 }
 
 /* ── ESTRELLAS HERO ── */
@@ -989,18 +957,14 @@ function initScrollReveal(){
   });
 }
 
-/* ── ITINERARIO ZIGZAG ── */
+/* ── ITINERARIO MOMENTOS ── */
 function initItinerary(){
-  const rows=document.querySelectorAll('.tz-row');
-  rows.forEach(r=>gsap.set(r,{opacity:0}));
-  rows.forEach((row,i)=>{
-    /* filas pares vienen de la izquierda, impares de la derecha */
-    const dir=i%2===0?-40:40;
-    gsap.to(row,{x:0,opacity:1,duration:1.05,ease:'power2.out',
-      delay:i*0.13,
-      scrollTrigger:{trigger:'#siti',start:'top 80%'},
-      onStart(){gsap.set(row,{x:dir});}
-    });
+  document.querySelectorAll('.iti-item').forEach((item,i)=>{
+    gsap.fromTo(item,
+      {y:28,opacity:0},
+      {y:0,opacity:1,duration:1.1,ease:'power2.out',
+       delay:i*0.18,
+       scrollTrigger:{trigger:'#siti',start:'top 82%'}});
   });
 }
 
