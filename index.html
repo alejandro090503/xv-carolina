@@ -233,48 +233,60 @@ section{padding:60px 26px;}
 .iti-zz{position:relative;padding:4px 0;}
 .iti-svg{
   position:absolute;left:0;top:0;width:100%;height:100%;
-  pointer-events:none;overflow:visible;
+  pointer-events:none;overflow:visible;z-index:0;
 }
-.iti-polyline{fill:none;stroke:rgba(192,192,192,0.22);stroke-width:1;}
+.iti-polyline{fill:none;stroke:rgba(192,192,192,0.20);stroke-width:1;}
+/*
+  Layout por fila: [content(30%) | dot(44px) | spacer(flex:1)]
+  Fila derecha (row-reverse): spacer llega a la izquierda, dot en centro, content a la derecha.
+  Así la línea diagonal cruza el ESPACIO vacío del spacer, nunca encima del texto.
+*/
 .iti-row{
-  display:flex;align-items:center;
-  min-height:96px;padding:6px 0;
+  display:flex;align-items:center;position:relative;z-index:1;
+  min-height:88px;padding:4px 0;
 }
 .iti-r{flex-direction:row-reverse;}
+.iti-content{
+  width:30%;flex-shrink:0;
+  padding:0 8px;
+}
+.iti-r .iti-content{text-align:right;}
+.iti-spacer{flex:1;}
 .iti-dot-wrap{
-  flex-shrink:0;width:48px;height:48px;
+  flex-shrink:0;width:44px;height:44px;
   display:flex;align-items:center;justify-content:center;
 }
 .iti-dot{
-  width:11px;height:11px;border-radius:50%;
+  width:9px;height:9px;border-radius:50%;
   background:var(--accent);
-  box-shadow:0 0 0 3px var(--bg),0 0 0 5.5px rgba(192,192,192,0.28);
+  box-shadow:0 0 0 3px var(--bg),0 0 0 5px rgba(192,192,192,0.25);
   position:relative;opacity:0;transform:scale(0);
 }
 .iti-dot::before,.iti-dot::after{
   content:'';position:absolute;border-radius:50%;
-  border:1px solid rgba(192,192,192,0.50);
+  border:1px solid rgba(192,192,192,0.45);
   top:50%;left:50%;transform:translate(-50%,-50%);
   animation:destello 2.6s ease-out infinite;
 }
 .iti-dot::after{animation-delay:1.3s;}
 @keyframes destello{
-  0%{width:11px;height:11px;opacity:.75;}
-  100%{width:44px;height:44px;opacity:0;}
+  0%{width:9px;height:9px;opacity:.7;}
+  100%{width:40px;height:40px;opacity:0;}
 }
-.iti-content{flex:1;padding:0 8px;}
+/* Tipografía minimalista */
 .iti-time{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(28px,9vw,40px);
-  font-weight:300;line-height:1;letter-spacing:3px;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(192,192,192,0.62);
+  font-size:17px;font-weight:300;
+  letter-spacing:2px;line-height:1.1;
+  color:rgba(192,192,192,0.80);
   font-variant-numeric:tabular-nums;display:block;
 }
 .iti-ev{
-  font-family:'Lato',sans-serif;font-size:9px;letter-spacing:3px;
-  text-transform:uppercase;color:rgba(192,192,192,0.46);
-  margin-top:8px;line-height:1.6;
+  font-family:'Lato',sans-serif;
+  font-size:8px;letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(192,192,192,0.38);
+  margin-top:5px;line-height:1.5;
 }
 
 /* ── ESTRELLAS DE FONDO ANIMADAS ── */
@@ -686,49 +698,54 @@ footer .fc{
         <polyline class="iti-polyline" id="itiPolyline" points="0,0"/>
       </svg>
 
-      <!-- IZQUIERDA -->
+      <!-- IZQUIERDA: [content | dot | spacer] -->
       <div class="iti-row">
-        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
         <div class="iti-content">
           <div class="iti-time">16:30</div>
           <div class="iti-ev">Recepcion de Invitados</div>
         </div>
+        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
+        <div class="iti-spacer"></div>
       </div>
 
-      <!-- DERECHA -->
+      <!-- DERECHA: row-reverse → visual [spacer | dot | content] -->
       <div class="iti-row iti-r">
-        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
         <div class="iti-content">
           <div class="iti-time">17:00</div>
           <div class="iti-ev">Misa de Accion de Gracias</div>
         </div>
+        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
+        <div class="iti-spacer"></div>
       </div>
 
       <!-- IZQUIERDA -->
       <div class="iti-row">
-        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
         <div class="iti-content">
           <div class="iti-time">19:30</div>
           <div class="iti-ev">Vals de Honor</div>
         </div>
+        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
+        <div class="iti-spacer"></div>
       </div>
 
       <!-- DERECHA -->
       <div class="iti-row iti-r">
-        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
         <div class="iti-content">
           <div class="iti-time">20:00</div>
           <div class="iti-ev">Cena y Brindis</div>
         </div>
+        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
+        <div class="iti-spacer"></div>
       </div>
 
       <!-- IZQUIERDA -->
       <div class="iti-row">
-        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
         <div class="iti-content">
           <div class="iti-time">21:30</div>
           <div class="iti-ev">Fiesta y Sorpresas</div>
         </div>
+        <div class="iti-dot-wrap"><div class="iti-dot"></div></div>
+        <div class="iti-spacer"></div>
       </div>
 
     </div>
@@ -1075,7 +1092,7 @@ function initDressCode(){
 
 /* ── COUNTDOWN ── */
 (function(){
-  const target=new Date('2027-10-18T17:00:00-06:00').getTime();
+  const target=new Date('2026-05-28T17:00:00-06:00').getTime();
   function tick(){
     const d=target-Date.now();if(d<=0)return;
     document.getElementById('cdD').textContent=String(Math.floor(d/86400000)).padStart(3,'0');
